@@ -1,88 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>TV Slideshow</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Signage</title>
 
-<style>
-html,body{
-    margin:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:black;
-}
-
-#pdf-canvas {
-    display:block;
-    margin:auto;
-    max-width:100vw;
-    max-height:100vh;
-}
-</style>
-</head>
-
-<body>
-
-<canvas id="pdf-canvas"></canvas>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-
-<script>
-
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-
-const url = 'current.pdf';
-
-let pdfDoc = null;
-let currentPage = 1;
-
-function renderPage(pageNum){
-
-    pdfDoc.getPage(pageNum).then(function(page){
-
-        const canvas = document.getElementById('pdf-canvas');
-        const ctx = canvas.getContext('2d');
-
-        const viewport = page.getViewport({scale:10});
-
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-
-        page.render({
-            canvasContext: ctx,
-            viewport: viewport
-        });
-    });
-}
-
-pdfjsLib.getDocument(url).promise.then(function(pdf){
-
-    pdfDoc = pdf;
-
-    renderPage(1);
-
-    setInterval(function(){
-
-        currentPage++;
-
-        if(currentPage > pdfDoc.numPages){
-            currentPage = 1;
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: black;
         }
 
-        renderPage(currentPage);
+        #slide {
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain;
+            display: block;
+        }
+    </style>
+</head>
+<body>
 
-    },10000);
+    <img id="slide" src="Page1.png" alt="Slide">
 
-}).catch(function(err){
+    <script>
+        const slides = [
+            "Page1.png",
+            "Page2.png"
+        ];
 
-    document.body.innerHTML =
-      '<pre style="color:white">' + err.message + '</pre>';
+        let current = 0;
+        const slideElement = document.getElementById("slide");
 
-});
+        setInterval(() => {
+            current = (current + 1) % slides.length;
 
-</script>
+            slideElement.src =
+                slides[current] + "?v=" + Date.now();
+        }, 10000);
+
+        // Reload page every minute to pick up updates from GitHub
+        setInterval(() => {
+            location.reload();
+        }, 60000);
+    </script>
 
 </body>
 </html>
