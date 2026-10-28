@@ -1,52 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TV Signage</title>
+<meta charset="UTF-8">
+<title>LDC TV</title>
 
-    <style>
-        html, body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: black;
-        }
+<style>
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+}
 
-        #slide {
-            width: 100vw;
-            height: 100vh;
-            object-fit: contain;
-            display: block;
-        }
-    </style>
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out;
+}
+
+.active {
+    opacity: 1;
+}
+</style>
 </head>
 <body>
 
-    <img id="slide" src="Slide1.PNG" alt="Slide">
+<img id="slideA" class="slide active" src="Slide1.png">
+<img id="slideB" class="slide">
 
-    <script>
-        const slides = [
-            "Slide1.PNG",
-            "Slide2.PNG"
-        ];
+<script>
+const slides = [
+    "Slide1.png",
+    "Slide2.png"
+];
 
-        let current = 0;
-        const slideElement = document.getElementById("slide");
+let currentSlide = 0;
+let visible = "A";
 
-        setInterval(() => {
-            current = (current + 1) % slides.length;
+const imgA = document.getElementById("slideA");
+const imgB = document.getElementById("slideB");
 
-            slideElement.src =
-                slides[current] + "?v=" + Date.now();
-        }, 10000);
+setInterval(() => {
 
-        // Reload page every minute to pick up updates from GitHub
-        setInterval(() => {
-            location.reload();
-        }, 60000);
-    </script>
+    currentSlide = (currentSlide + 1) % slides.length;
+
+    if (visible === "A") {
+        imgB.src = slides[currentSlide] + "?v=" + Date.now();
+
+        imgB.classList.add("active");
+        imgA.classList.remove("active");
+
+        visible = "B";
+    } else {
+        imgA.src = slides[currentSlide] + "?v=" + Date.now();
+
+        imgA.classList.add("active");
+        imgB.classList.remove("active");
+
+        visible = "A";
+    }
+
+}, 20000);
+
+// Refresh every 5 minutes to catch GitHub updates
+setInterval(() => {
+    location.reload();
+}, 300000);
+
+</script>
 
 </body>
 </html>
