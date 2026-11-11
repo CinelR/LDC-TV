@@ -12,7 +12,10 @@ html, body {
     overflow: hidden;
     background: black;
 }
-
+.metricRow {
+    margin-bottom:5px;
+}
+    
 .slide {
     position: absolute;
     inset: 0;
@@ -79,14 +82,18 @@ html, body {
 <img id="slideA" class="slide active" src="Slide1.PNG">
 <img id="slideB" class="slide">
 <div id="metricsContainer">
+    <div class="metricRow">
     <span id="npsValue" class="metric"></span>
     <span id="npsTarget" class="metric"></span>
-    </br>
+    </div>
+    <div class="metricRow">
     <span class="metric">1</span>
     <span class="metric">2</span>
-    </br>
+    </div>
+    <div class="metricRow">
     <span class="metric">3</span>
     <span class="metric">4</span>
+    </div>
 </div>
 <div id="clock"></div>
 <script>
