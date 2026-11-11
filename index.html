@@ -97,7 +97,7 @@ async function loadData() {
         const npsTarget = document.getElementById("npsTarget");
 
         npsValue.textContent = data.nps;
-        npstarget.textContent = data.npsTarget;
+        npsTarget.textContent = data.npsTarget;
 
         if (data.nps >= data.npsTarget) {
             npsValue.style.color = "#00C853"; // Green
@@ -159,7 +159,7 @@ function updateClock() {
 
     document.getElementById('clock').textContent = time;
 }
-
+loadData();
 updateClock();
 setInterval(updateClock, 1000);
 
