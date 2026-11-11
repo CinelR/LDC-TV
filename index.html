@@ -121,8 +121,8 @@ let visible = "A";
 const imgA = document.getElementById("slideA");
 const imgB = document.getElementById("slideB");
 const metrics = document.getElementById("metricsContainer");
-metrics.style.display =
-    currentSlide === 0 ? "block" : "none";
+metrics.style.opacity =
+    currentSlide === 0 ? "1" : "0";
 setInterval(() => {
 
     currentSlide = (currentSlide + 1) % slides.length;
@@ -144,8 +144,8 @@ setInterval(() => {
     }
 
     // Show metrics only on Slide1
-    metrics.style.display =
-        currentSlide === 0 ? "block" : "none";
+    metrics.style.opacity =
+        currentSlide === 0 ? "1" : "0";
 
 }, 30000);
 
