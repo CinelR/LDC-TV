@@ -133,6 +133,16 @@ async function loadData() {
         } else {
             npsValue.style.color = "#D50000"; // Red
         }
+        if (data.rpc >= data.rpcTarget) {
+            rpcValue.style.color = "#00C853"; // Green
+        } else {
+            rpcValue.style.color = "#D50000"; // Red
+        }
+        if (data.volume >= data.volumeTarget) {
+            volumeValue.style.color = "#00C853"; // Green
+        } else {
+            volumeValue.style.color = "#D50000"; // Red
+        }
     }
     catch (e) {
         console.error(e);
