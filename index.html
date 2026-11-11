@@ -100,10 +100,10 @@ async function loadData() {
         const data = await response.json();
 
         const npsValue = document.getElementById("npsValue");
-        const npsTarget = "  (${document.getElementById("npsTarget").textContent})";
+        const npsTarget = document.getElementById("npsTarget");
 
         npsValue.textContent = data.nps;
-        npsTarget.textContent = data.npsTarget;
+        npsTarget.textContent = "  (" + data.npsTarget + ")";
 
         if (data.nps >= data.npsTarget) {
             npsValue.style.color = "#00C853"; // Green
