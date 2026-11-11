@@ -46,16 +46,16 @@ html, body {
     font-family: Arial, sans-serif;
     transition: opacity 0.7s ease-in-out;
 }
-
-#npsTarget {
-    color: white;
+.metric {
     font-size: 22px;
     font-weight: bold;
 }
+    
+#npsTarget {
+    color: white;
+}
 
 #npsValue {
-    font-size: 22px;
-    font-weight: bold;
     line-height: 1;
 }
     
@@ -83,14 +83,14 @@ html, body {
 <img id="slideA" class="slide active" src="Slide1.PNG">
 <img id="slideB" class="slide">
 <div id="metricsContainer">
-    <span id="npsValue"></span>
-    <span id="npsTarget"></span>
+    <span id="npsValue" class="metric"></span>
+    <span id="npsTarget" class="metric"></span>
     </br>
-    <span>1</span>
-    <span>2</span>
+    <span class="metric">1</span>
+    <span class="metric">2</span>
     </br>
-    <span>3</span>
-    <span>4</span>
+    <span class="metric">3</span>
+    <span class="metric">4</span>
 </div>
 <div id="clock"></div>
 <script>
