@@ -38,12 +38,13 @@ html, body {
     font-weight: bold;
 }
     
-#npsContainer {
+#metricsContainer {
     position: absolute;
     left: 50px;
     bottom: 50px;
     z-index: 1000;
     font-family: Arial, sans-serif;
+    transition: opacity 0.7s ease-in-out;
 }
 
 #npsTarget {
@@ -81,7 +82,7 @@ html, body {
 
 <img id="slideA" class="slide active" src="Slide1.PNG">
 <img id="slideB" class="slide">
-<div id="npsContainer">
+<div id="metricsContainer">
     <div id="npsValue"></div>
     <div id="npsTarget"></div>
 </div>
@@ -119,7 +120,9 @@ let visible = "A";
 
 const imgA = document.getElementById("slideA");
 const imgB = document.getElementById("slideB");
-
+const metrics = document.getElementById("metricsContainer");
+metrics.style.display =
+    currentSlide === 0 ? "block" : "none";
 setInterval(() => {
 
     currentSlide = (currentSlide + 1) % slides.length;
@@ -139,6 +142,10 @@ setInterval(() => {
 
         visible = "A";
     }
+
+    // Show metrics only on Slide1
+    metrics.style.display =
+        currentSlide === 0 ? "block" : "none";
 
 }, 30000);
 
