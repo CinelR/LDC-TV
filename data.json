@@ -1,8 +1,8 @@
 {
-  "nps": 60
-  "npsTarget": 65
-  "RPC":12.48
-  "RPCTarget":20.92
-  "volumeLW":4598
+  "nps": 60,
+  "npsTarget": 65,
+  "RPC":12.48,
+  "RPCTarget":20.92,
+  "volumeLW":4598,
   "volumeTarget":6000
 }
