@@ -26,7 +26,18 @@ html, body {
 .active {
     opacity: 1;
 }
+    
+#nps {
+    position: absolute;
+    top: 50px;
+    right: 50px;
 
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 48px;
+    font-weight: bold;
+}
+    
 #clock {
     position: absolute;
     top: 20px;
@@ -50,8 +61,22 @@ html, body {
 
 <img id="slideA" class="slide active" src="Slide1.PNG">
 <img id="slideB" class="slide">
+<div id="nps" class="metric"></div>
 <div id="clock"></div>
 <script>
+async function loadData() {
+    try {
+        const response = await fetch("data.json?v=" + Date.now());
+        const data = await response.json();
+
+        document.getElementById("nps").textContent =
+            `NPS: ${data.nps}`;
+    }
+    catch (e) {
+        console.error("Could not load data.json", e);
+    }
+}
+
 const slides = [
     "Slide1.PNG",
     "Slide2.PNG"
