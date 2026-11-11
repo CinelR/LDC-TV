@@ -38,6 +38,26 @@ html, body {
     font-weight: bold;
 }
     
+#npsContainer {
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+}
+
+#npsTarget {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#npsValue {
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
+}
+    
 #clock {
     position: absolute;
     top: 20px;
@@ -61,7 +81,10 @@ html, body {
 
 <img id="slideA" class="slide active" src="Slide1.PNG">
 <img id="slideB" class="slide">
-<div id="nps" class="metric"></div>
+<div id="npsContainer">
+    <div id="npsValue"></div>
+    <div id="npsTarget"></div>
+</div>
 <div id="clock"></div>
 <script>
 async function loadData() {
@@ -69,11 +92,18 @@ async function loadData() {
         const response = await fetch("data.json?v=" + Date.now());
         const data = await response.json();
 
-        document.getElementById("nps").textContent =
-            `NPS: ${data.nps}`;
+        const npsValue = document.getElementById("npsValue");
+
+        npsValue.textContent = data.nps;
+
+        if (data.nps >= data.npsTarget) {
+            npsValue.style.color = "#00C853"; // Green
+        } else {
+            npsValue.style.color = "#D50000"; // Red
+        }
     }
     catch (e) {
-        console.error("Could not load data.json", e);
+        console.error(e);
     }
 }
 
