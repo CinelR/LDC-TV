@@ -59,6 +59,16 @@ html, body {
     font-weight: normal;
     font-style: italic;
 }
+#rpcTarget {
+    color: white;
+    font-weight: normal;
+    font-style: italic;
+}
+#volumeTarget {
+    color: white;
+    font-weight: normal;
+    font-style: italic;
+}
     
 #clock {
     position: absolute;
@@ -89,12 +99,12 @@ html, body {
     <span id="npsTarget" class="metric"></span>
     </div>
     <div class="metricRow">
-    <span class="metric">1</span>
-    <span class="metric">2</span>
+    <span id="rpcValue" class="metric"></span>
+    <span id="rpcTarget" class="metric"></span>
     </div>
     <div class="metricRow">
-    <span class="metric">3</span>
-    <span class="metric">4</span>
+    <span id="volumeValue" class="metric"></span>
+    <span id="volumeTarget" class="metric"></span>
     </div>
 </div>
 <div id="clock"></div>
@@ -106,9 +116,17 @@ async function loadData() {
 
         const npsValue = document.getElementById("npsValue");
         const npsTarget = document.getElementById("npsTarget");
+        const rpcValue = document.getElementById("rpcValue");
+        const rpcTarget = document.getElementById("rpcTarget");
+        const volumeValue = document.getElementById("volumeValue");
+        const volumeTarget = document.getElementById("volumeTarget");
 
         npsValue.textContent = data.nps;
         npsTarget.textContent = "  (" + data.npsTarget + ")";
+        rpcValue.textContent = data.rpc;
+        rpcTarget.textContent = "  (" + data.rpcTarget + ")";
+        volumeValue.textContent = data.volume;
+        volumeTarget.textContent = "  (" + data.volumeTarget + ")";
 
         if (data.nps >= data.npsTarget) {
             npsValue.style.color = "#00C853"; // Green
